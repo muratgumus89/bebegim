@@ -201,4 +201,68 @@ public class ActivityOpening extends Activity implements View.OnClickListener {
             Log.e("Kontrol", (String.valueOf(code)));
         }
     }
+    private void babyControl(){
+        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+
+        nameValuePairs.add(new BasicNameValuePair("user_id",userNameforLogin));
+        try
+        {
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost("http://176.58.88.85/~murat/baby_control.php");
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            HttpResponse response = httpclient.execute(httppost);
+            HttpEntity entity = response.getEntity();
+            is = entity.getContent();
+            Log.e("pass 1", "connection success ");
+        }
+        catch(Exception e)
+        {
+            Log.e("Fail 1", e.toString());
+            Toast.makeText(getApplicationContext(), "Invalid IP Address",
+                    Toast.LENGTH_LONG).show();
+        }
+
+        try
+        {
+            BufferedReader reader = new BufferedReader
+                    (new InputStreamReader(is,"utf-8"),8);
+            StringBuilder sb = new StringBuilder();
+            while ((line = reader.readLine()) != null)
+            {
+                sb.append(line + "\n");
+            }
+            is.close();
+            result = sb.toString();;
+        }
+        catch(Exception e)
+        {
+            Log.e("Fail 2", e.toString());
+        }
+
+        try
+        {
+            JSONObject json_data = new JSONObject(result);
+            code=json_data.getInt("code");
+            Log.e("kontrol", (String.valueOf(code)));
+            /******************
+             *  Checked record is inserted or not
+             */
+            if(code==0)
+            {
+                Intent intentCreateBaby = new Intent(getApplicationContext(),
+                        ActivityCreateBaby.class);
+                startActivity(intentCreateBaby);
+        }
+            else
+            {
+                Intent intentHomeScreen = new Intent(getApplicationContext(),
+                        ActivityFeatures.class);
+                startActivity(intentHomeScreen);
+            }
+        }
+        catch(Exception e)
+        {
+            Log.e("Fail 3", e.toString());
+        }
+    }
 }
