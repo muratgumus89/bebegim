@@ -43,6 +43,7 @@ public class ActivityOpening extends Activity implements View.OnClickListener {
     String line=null;
     int code;
 
+    //Buraya ilk degisikliğimi yapıyorum murat pull request çekiyorum sende merge ediyorsun.
     //Remember me variables
     public static final String PREFS_NAME = "MyPrefsFile";
     private static final String PREF_USERNAME = "username";
