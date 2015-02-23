@@ -179,10 +179,10 @@ public class ActivitySignUp extends Activity implements View.OnClickListener {
                 Toast.makeText(getBaseContext(), "kayıt başarıyla eklendi.",
                         Toast.LENGTH_SHORT).show();
                 Intent intentOpening = new Intent(getApplicationContext(),
-                        ActivityCreateBaby.class);
+                        ActivityFeatures.class);
                 startActivity(intentOpening);
             }
-            /******************
+            /******************"
              *  Chech userName is exist or not
              */
             else if(code==2){

@@ -109,7 +109,6 @@ public class ActivityOpening extends Activity implements View.OnClickListener {
                 break;
         }
     }
-
     private void loginControl() {
         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
@@ -124,11 +123,11 @@ public class ActivityOpening extends Activity implements View.OnClickListener {
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();
             is = entity.getContent();
-            Log.e("pass 1", "connection success ");
+            Log.e("LoginButtonCon", "connection success ");
         }
         catch(Exception e)
         {
-            Log.e("Fail 1", e.toString());
+            Log.e("LoginButtonFail", e.toString());
             Toast.makeText(getApplicationContext(), "Invalid IP Address",
                     Toast.LENGTH_LONG).show();
         }
@@ -147,14 +146,14 @@ public class ActivityOpening extends Activity implements View.OnClickListener {
         }
         catch(Exception e)
         {
-            Log.e("Fail 2", e.toString());
+            Log.e("LoginButtonFail2", e.toString());
         }
 
         try
         {
             JSONObject json_data = new JSONObject(result);
             code=json_data.getInt("code");
-            Log.e("kontrol", (String.valueOf(code)));
+            Log.e("LoginBottonContentCode", (String.valueOf(code)));
             /******************
              *  Checked record is inserted or not
              */
@@ -195,16 +194,17 @@ public class ActivityOpening extends Activity implements View.OnClickListener {
         }
         catch(Exception e)
         {
-            Log.e("Fail 3", e.toString());
+            Log.e("LoginButtonFail 3", e.toString());
         }
         finally {
-            Log.e("Kontrol", (String.valueOf(code)));
+            babyControl();
+            Log.e("LoginButtonFinally", (String.valueOf(code)));
         }
     }
     private void babyControl(){
         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
-        nameValuePairs.add(new BasicNameValuePair("user_id",userNameforLogin));
+        nameValuePairs.add(new BasicNameValuePair("user_id",getUserId(userNameforLogin)));
         try
         {
             HttpClient httpclient = new DefaultHttpClient();
@@ -264,5 +264,46 @@ public class ActivityOpening extends Activity implements View.OnClickListener {
         {
             Log.e("Fail 3", e.toString());
         }
+    }
+    private String getUserId(String userNameforLogin){
+        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+
+        nameValuePairs.add(new BasicNameValuePair("email",userNameforLogin));
+        nameValuePairs.add(new BasicNameValuePair("user_name",userNameforLogin));
+        try
+        {
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost("http://176.58.88.85/~murat/get_user_id.php");
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            HttpResponse response = httpclient.execute(httppost);
+            HttpEntity entity = response.getEntity();
+            is = entity.getContent();
+            Log.e("UserIdCon", "connection success ");
+        }
+        catch(Exception e)
+        {
+            Log.e("UserIdFail", e.toString());
+            Toast.makeText(getApplicationContext(), "Invalid IP Address",
+                    Toast.LENGTH_LONG).show();
+        }
+
+        try
+        {
+            BufferedReader reader = new BufferedReader
+                    (new InputStreamReader(is,"utf-8"),8);
+            StringBuilder sb = new StringBuilder();
+            while ((line = reader.readLine()) != null)
+            {
+                sb.append(line + "\n");
+            }
+            is.close();
+            result = sb.toString();
+            Log.e("result", result);
+        }
+        catch(Exception e)
+        {
+            Log.e("Fail 2", e.toString());
+        }
+        return result;
     }
 }
