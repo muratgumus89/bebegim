@@ -40,6 +40,7 @@ public class ActivityOpening extends Activity implements View.OnClickListener {
     CheckBox cbRememberMe;
     InputStream is=null;
     String result=null;
+    String strUserIDOpening;
     String line=null;
     int code;
 
@@ -203,8 +204,8 @@ public class ActivityOpening extends Activity implements View.OnClickListener {
     }
     private void babyControl(){
         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-
-        nameValuePairs.add(new BasicNameValuePair("user_id",getUserId(userNameforLogin)));
+        strUserIDOpening=getUserId(userNameforLogin);
+        nameValuePairs.add(new BasicNameValuePair("user_id",strUserIDOpening));
         try
         {
             HttpClient httpclient = new DefaultHttpClient();
@@ -251,6 +252,9 @@ public class ActivityOpening extends Activity implements View.OnClickListener {
             {
                 Intent intentCreateBaby = new Intent(getApplicationContext(),
                         ActivityCreateBaby.class);
+                Bundle b = new Bundle();
+                b.putString("userid", strUserIDOpening);
+                intentCreateBaby.putExtras(b);
                 startActivity(intentCreateBaby);
         }
             else

@@ -1,38 +1,52 @@
 package com.example.murat.benimbebegim;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
-import java.util.TimeZone;
+        import java.io.BufferedReader;
+        import java.io.InputStream;
+        import java.io.InputStreamReader;
+        import java.text.SimpleDateFormat;
+        import java.util.ArrayList;
+        import java.util.Calendar;
+        import java.util.Locale;
+        import java.util.TimeZone;
 
-import android.app.Activity;
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
-import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.TimePicker;
-import android.widget.Toast;
+        import android.app.Activity;
+        import android.app.DatePickerDialog;
+        import android.app.TimePickerDialog;
+        import android.content.Intent;
+        import android.database.Cursor;
+        import android.graphics.Bitmap;
+        import android.net.Uri;
+        import android.os.Bundle;
+        import android.provider.MediaStore;
+        import android.util.Log;
+        import android.view.ContextMenu;
+        import android.view.ContextMenu.ContextMenuInfo;
+        import android.view.LayoutInflater;
+        import android.view.MenuInflater;
+        import android.view.MenuItem;
+        import android.view.View;
+        import android.view.View.OnClickListener;
+        import android.view.ViewGroup;
+        import android.widget.AdapterView;
+        import android.widget.AdapterView.OnItemSelectedListener;
+        import android.widget.ArrayAdapter;
+        import android.widget.Button;
+        import android.widget.DatePicker;
+        import android.widget.EditText;
+        import android.widget.ImageView;
+        import android.widget.Spinner;
+        import android.widget.TimePicker;
+        import android.widget.Toast;
+
+        import org.apache.http.HttpEntity;
+        import org.apache.http.HttpResponse;
+        import org.apache.http.NameValuePair;
+        import org.apache.http.client.HttpClient;
+        import org.apache.http.client.entity.UrlEncodedFormEntity;
+        import org.apache.http.client.methods.HttpPost;
+        import org.apache.http.impl.client.DefaultHttpClient;
+        import org.apache.http.message.BasicNameValuePair;
+        import org.json.JSONObject;
 
 
 public class ActivityCreateBaby extends Activity implements OnClickListener {
@@ -48,8 +62,12 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
     String selectedDate, selectedTime, strTime, strDate, getBabyName,
             getBabyWeight, getBabyHeight, getUserId,
             selectedGendersForCreateBaby;
+    InputStream is=null;
+    String result=null;
+    String line=null;
+    int code;
 
-    private String[] genders = { "MALE", "FEMALE" };
+    private String[] genders = {"MALE", "FEMALE"};
     private Spinner spinnerSelectGender;
     private ArrayAdapter<String> dataAdapterForGender;
 
@@ -59,6 +77,7 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
     private static final int SELECT_PICTURE = 1;
     private String selectedImagePath;
     public static Uri selectedImageUri;
+    String getUserIDBabyCreate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,23 +213,55 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
                  * Refress all areas
                  */
                 edtNameCreateBaby.setText(null);
-                edtWeightCreateBaby.setText(null);
-                edtHeightCreateBaby.setText(null);
                 Calendar c_date = Calendar.getInstance();
                 SimpleDateFormat date = new SimpleDateFormat("dd/MM/yy");
                 strDate = date.format(c_date.getTime());
                 btnDatePicker.setText(strDate);
                 Calendar c_time = Calendar.getInstance(TimeZone.getDefault());
-                SimpleDateFormat time = new SimpleDateFormat("HH:mm a",
+                SimpleDateFormat time = new SimpleDateFormat("HH:mm",
                         Locale.getDefault());
                 strTime = time.format(c_time.getTime());
                 btnTimePicker.setText(strTime);
-                // Intent editBaby = new Intent(getApplicationContext(),
-                // EditBabyInfoActivity.class);
-                // startActivity(editBaby);
                 break;
 
             case R.id.btnOk_createBaby:
+                /******************
+                 * Get the values on the screen
+                 */
+                getBabyName = edtNameCreateBaby.getText().toString();
+                Bundle basket = getIntent().getExtras();
+                getUserIDBabyCreate = basket.getString("userid");
+
+                /******************
+                 * Check Date and Time Picker Values null or not
+                 */
+                if (btnDatePicker.getText().equals(strDate)) {
+                    selectedDate = btnDatePicker.getText().toString();
+                }
+                if (btnTimePicker.getText().equals(strTime)) {
+                    selectedTime = btnTimePicker.getText().toString();
+                }
+                /******************
+                 * Checked Empty Areas For All Records
+                 */
+                if (getBabyName.equals("")) {
+                    Toast.makeText(getApplicationContext(),
+                            "Bebek İsmi Boş Bırakılamaz!!!", Toast.LENGTH_LONG)
+                            .show();
+                    return;
+                }
+                if (selectedGendersForCreateBaby.equals("")) {
+                    Toast.makeText(getApplicationContext(),
+                            "Cinsiyet Bilgisini Seçiniz!!!", Toast.LENGTH_LONG)
+                            .show();
+                    return;
+                }
+                else {
+                    /******************
+                     * Save the datas to Database
+                     */
+                    insert();
+                }
 
                 break;
             case R.id.ivBabyPicture_createBaby:
@@ -223,6 +274,80 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
                 break;
             default:
                 break;
+        }
+    }
+
+    private void insert() {
+        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+
+        nameValuePairs.add(new BasicNameValuePair("name", getBabyName));
+        Log.e("name", getBabyName);
+        nameValuePairs.add(new BasicNameValuePair("date", selectedDate));
+        Log.e("date", selectedDate);
+        nameValuePairs.add(new BasicNameValuePair("time", selectedTime));
+        Log.e("time", selectedTime);
+        nameValuePairs.add(new BasicNameValuePair("image", selectedImageUri.toString()));
+        Log.e("image", selectedImageUri.toString());
+        nameValuePairs.add(new BasicNameValuePair("UID",getUserIDBabyCreate));
+        Log.e("uid", getUserIDBabyCreate);
+        nameValuePairs.add(new BasicNameValuePair("gender",selectedGendersForCreateBaby));
+        Log.e("gender",selectedGendersForCreateBaby);
+        nameValuePairs.add(new BasicNameValuePair("theme","Şimdilik Boş"));
+
+        try {
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost("http://176.58.88.85/~murat/insert_create_baby.php");
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            HttpResponse response = httpclient.execute(httppost);
+            HttpEntity entity = response.getEntity();
+            is = entity.getContent();
+            Log.e("pass 1", "connection success ");
+        } catch (Exception e) {
+            Log.e("Fail 1", e.toString());
+            Toast.makeText(getApplicationContext(), "Invalid IP Address",
+                    Toast.LENGTH_LONG).show();
+        }
+
+        try {
+            BufferedReader reader = new BufferedReader
+                    (new InputStreamReader(is, "utf-8"), 8);
+            StringBuilder sb = new StringBuilder();
+            while ((line = reader.readLine()) != null) {
+                sb.append(line + "\n");
+            }
+            is.close();
+            result = sb.toString();
+            Log.e("KontrolÖnceCreateBaby", result);
+        } catch (Exception e) {
+            Log.e("CreateBabyFail2", e.toString());
+        }
+
+        try {
+            JSONObject json_data = new JSONObject(result);
+            code = json_data.getInt("code");
+            Log.e("CreateBabyCode", (String.valueOf(code)));
+            /******************
+             *  Checked record is inserted or not
+             */
+            if (code == 1) {
+                Toast.makeText(getBaseContext(), "kayıt başarıyla eklendi.",
+                        Toast.LENGTH_SHORT).show();
+            }
+            /******************"
+             *  Chech userName is exist or not
+             */
+            else if (code == 2) {
+                Toast.makeText(getBaseContext(), "Bu kullanıcıya ait" + getBabyName + " isimli bir kayıt mevcut!!!",
+                        Toast.LENGTH_SHORT).show();
+            }
+             else {
+                Toast.makeText(getBaseContext(), "Sorry, Try Again",
+                        Toast.LENGTH_LONG).show();
+            }
+        } catch (Exception e) {
+            Log.e("CreateBabyFail3", e.toString());
+        } finally {
+            Log.e("CreateBabyFinally", (String.valueOf(code)));
         }
     }
 
@@ -256,7 +381,7 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
             case R.id.itemChooseFromGallery:
                 // Biraz arastırmamız gerekiyor
                 // En son açılan resimler seçilemiyor !!!!!!.....
-                Log.i("burdayim","buragya gelebiliyorum");
+                Log.i("burdayim", "buragya gelebiliyorum");
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -280,11 +405,13 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == SELECT_PICTURE) {
-                selectedImageUri = data.getData();
-                Log.i("acilis_data",selectedImageUri.toString());
-                selectedImagePath = getPath(selectedImageUri);
-                Log.i("acilis_returnpath",selectedImagePath);
-                imgSelectBabyPicture.setImageURI(selectedImageUri);
+                if (data.getData() != null) {
+                    selectedImageUri = data.getData();
+                    imgSelectBabyPicture.setImageURI(selectedImageUri);
+                    selectedImagePath = getPath(selectedImageUri);
+                }else if( data.getData() == null) {
+                    Log.i("data.getData()","abi burası null dönüyor");
+                }
             } else {
                 Bundle extras = data.getExtras();
                 Bitmap bmp = (Bitmap) extras.get("data");
@@ -301,7 +428,7 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
         }
         // try to retrieve the image from the media store first
         // this will only work for images selected from gallery
-        String[] projection = { MediaStore.Images.Media.DATA };
+        String[] projection = {MediaStore.Images.Media.DATA};
         Cursor cursor = managedQuery(uri, projection, null, null, null);
         if (cursor != null) {
             int column_index = cursor
