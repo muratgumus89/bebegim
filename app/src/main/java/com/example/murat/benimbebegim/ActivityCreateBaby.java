@@ -15,6 +15,7 @@ package com.example.murat.benimbebegim;
         import android.content.Intent;
         import android.database.Cursor;
         import android.graphics.Bitmap;
+        import android.graphics.Color;
         import android.net.Uri;
         import android.os.Bundle;
         import android.provider.MediaStore;
@@ -34,6 +35,9 @@ package com.example.murat.benimbebegim;
         import android.widget.DatePicker;
         import android.widget.EditText;
         import android.widget.ImageView;
+        import android.widget.LinearLayout;
+        import android.widget.RelativeLayout;
+        import android.widget.ScrollView;
         import android.widget.Spinner;
         import android.widget.TimePicker;
         import android.widget.Toast;
@@ -53,12 +57,14 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
 
     ImageView imgSelectBabyPicture;
     EditText edtNameCreateBaby, edtWeightCreateBaby, edtHeightCreateBaby;
-    Button btnDatePicker, btnTimePicker, btnCancelCreateBaby, btnOkCreateBaby;
+    Button btnDatePicker, btnTimePicker, btnCancelCreateBaby, btnOkCreateBaby,btnTheme;
 
     Calendar myCalendar = Calendar.getInstance();
     DatePickerDialog.OnDateSetListener dateForDB;
     TimePickerDialog.OnTimeSetListener timeForDB;
+    private static final int DEMO_DIALOG = 1;
 
+    LinearLayout colorlayout;
     String selectedDate, selectedTime, strTime, strDate, getBabyName,
             getBabyWeight, getBabyHeight, getUserId,
             selectedGendersForCreateBaby;
@@ -99,6 +105,8 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
         edtNameCreateBaby = (EditText) findViewById(R.id.etBabyName_createBaby);
         imgSelectBabyPicture = (ImageView) findViewById(R.id.ivBabyPicture_createBaby);
         spinnerSelectGender = (Spinner) findViewById(R.id.gender_spinner_createBaby);
+        btnTheme=(Button)findViewById(R.id.btnTheme_createBaby);
+
         /****************************
          * Set Click Listener to Buttons
          */
@@ -107,6 +115,7 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
         btnCancelCreateBaby.setOnClickListener((OnClickListener) this);
         btnOkCreateBaby.setOnClickListener((OnClickListener) this);
         imgSelectBabyPicture.setOnClickListener((OnClickListener) this);
+        btnTheme.setOnClickListener((OnClickListener) this);
         /****************************
          * Datas For Genders
          */
@@ -271,6 +280,10 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
                 unregisterForContextMenu(imgSelectBabyPicture);
                 Log.i("sdf", "bas");
 
+                break;
+
+            case R.id.btnTheme_createBaby:
+                showColorPickerDialogDemo();
                 break;
             default:
                 break;
@@ -437,5 +450,37 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
         }
         // this is our fallback here
         return uri.getPath();
+    }
+
+    /**
+     * Example of using Color Picker in Alert Dialog.
+     */
+    private void showColorPickerDialogDemo() {
+
+        int initialColor = Color.WHITE;
+
+        ColorPickerDialog colorPickerDialog = new ColorPickerDialog(this, initialColor, new ColorPickerDialog.OnColorSelectedListener() {
+
+            @Override
+            public void onColorSelected(int color) {
+                showToast(color);
+            }
+
+        });
+        colorPickerDialog.show();
+
+    }
+
+    /**
+     * Displays Toast with RGB values of given color.
+     *
+     * @param color the color
+     */
+    private void showToast(int color) {
+        String rgbString = "R: " + Color.red(color) + " B: " + Color.blue(color) + " G: " + Color.green(color) +"Yazdı";
+        Toast.makeText(this, rgbString, Toast.LENGTH_SHORT).show();
+        ActivityCreateBaby.this.findViewById(android.R.id.content)
+                .setBackgroundColor(color);
+
     }
 }
