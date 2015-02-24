@@ -76,11 +76,17 @@ public class ActivitySignUp extends Activity implements View.OnClickListener {
                  *  Get the values on the screen
                  */
                 user_name = edtUserName_Kayit.getText().toString();
+                Log.e("SignUp user_name:",user_name);
                 name = edtName_Kayit.getText().toString();
+                Log.e("SignUp name:",name);
                 surname = edtSurname_Kayit.getText().toString();
+                Log.e("SignUp surname:", surname);
                 email = edtEmail_Kayit.getText().toString();
+                Log.e("SignUp email:", email);
                 password = edtPassword_Kayit.getText().toString();
+                Log.e("SignUp password:", password);
                 getConfPassword = edtCon_password_Kayit.getText().toString();
+                Log.e("SignUp conPassword:", getConfPassword);
                 isValidEmail=isValidEmailAddress(email);
                 /******************
                  *  check if null area or not
@@ -134,7 +140,7 @@ public class ActivitySignUp extends Activity implements View.OnClickListener {
         {
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost("http://176.58.88.85/~murat/insert.php");
-            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();
             is = entity.getContent();

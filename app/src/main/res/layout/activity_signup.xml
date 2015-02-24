@@ -55,7 +55,8 @@
                 android:drawableLeft="@drawable/user"
                 android:hint="User Name"
                 android:padding="5dp"
-                android:textColorHint="#bbbbbb" />
+                android:textColorHint="#bbbbbb"
+                />
 
             <EditText
                 android:id="@+id/name"
@@ -64,7 +65,8 @@
                 android:drawableLeft="@drawable/user"
                 android:hint="Name"
                 android:padding="5dp"
-                android:textColorHint="#bbbbbb" />
+                android:textColorHint="#bbbbbb"
+                />
 
             <EditText
                 android:id="@+id/surname"
@@ -74,7 +76,8 @@
                 android:drawableLeft="@drawable/user"
                 android:hint="Surname"
                 android:padding="5dp"
-                android:textColorHint="#bbbbbb" />
+                android:textColorHint="#bbbbbb"
+                />
 
             <EditText
                 android:id="@+id/email"
@@ -85,7 +88,10 @@
                 android:hint="Email"
                 android:padding="5dp"
                 android:singleLine="true"
-                android:textColorHint="#bbbbbb"></EditText>
+                android:textColorHint="#bbbbbb"
+                >
+
+                </EditText>
 
             <EditText
                 android:id="@+id/password"
@@ -96,7 +102,8 @@
                 android:hint="Password"
                 android:padding="5dp"
                 android:password="true"
-                android:textColorHint="#bbbbbb" />
+                android:textColorHint="#bbbbbb"
+                />
 
             <EditText
                 android:id="@+id/password_conf"
@@ -107,7 +114,8 @@
                 android:hint="Confirm Password"
                 android:padding="5dp"
                 android:password="true"
-                android:textColorHint="#bbbbbb" />
+                android:textColorHint="#bbbbbb"
+                />
         </LinearLayout>
 
         <Button

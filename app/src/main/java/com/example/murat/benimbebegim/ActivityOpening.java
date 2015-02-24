@@ -278,7 +278,7 @@ public class ActivityOpening extends Activity implements View.OnClickListener {
         {
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost("http://176.58.88.85/~murat/get_user_id.php");
-            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();
             is = entity.getContent();

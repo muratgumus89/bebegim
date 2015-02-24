@@ -29,6 +29,9 @@
     <string name="photos">Photos</string>
     <string name="calendar">Calendar</string>
     <string name="signup">Don\'t have account? Sign Up</string>
+    <string name="button_label">OK</string>
+    <string name="pref_name">Pick a color</string>
+    <string name="pref_summary">DialogPreference with Color Picker.</string>
 
     <style name="DefaultButtonText">
         <item name="android:layout_width">fill_parent</item>

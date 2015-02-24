@@ -293,11 +293,10 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
         nameValuePairs.add(new BasicNameValuePair("gender",selectedGendersForCreateBaby));
         Log.e("gender",selectedGendersForCreateBaby);
         nameValuePairs.add(new BasicNameValuePair("theme","Şimdilik Boş"));
-
         try {
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost("http://176.58.88.85/~murat/insert_create_baby.php");
-            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();
             is = entity.getContent();
@@ -337,7 +336,7 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
              *  Chech userName is exist or not
              */
             else if (code == 2) {
-                Toast.makeText(getBaseContext(), "Bu kullanıcıya ait" + getBabyName + " isimli bir kayıt mevcut!!!",
+                Toast.makeText(getBaseContext(), "Bu kullanıcıya ait" + getBabyName + "     isimli bir kayıt mevcut!!!",
                         Toast.LENGTH_SHORT).show();
             }
              else {
