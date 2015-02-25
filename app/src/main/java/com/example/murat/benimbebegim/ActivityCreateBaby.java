@@ -17,6 +17,7 @@ package com.example.murat.benimbebegim;
         import android.content.Context;
         import android.content.DialogInterface;
         import android.content.Intent;
+        import android.content.SharedPreferences;
         import android.database.Cursor;
         import android.graphics.Bitmap;
         import android.graphics.Color;
@@ -76,10 +77,19 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
     String selectedDate, selectedTime, strTime, strDate, getBabyName,
             getBabyWeight, getBabyHeight, getUserId,
             selectedGendersForCreateBaby;
+
+    /*
+    Variables for Database
+     */
     InputStream is=null;
     String result=null;
     String line=null;
     int code;
+    /*
+    Variables For SharedPreferences
+     */
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
 
     private String[] genders = {"MALE", "FEMALE"};
     private Spinner spinnerSelectGender;
