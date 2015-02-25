@@ -191,6 +191,7 @@ public class ActivityOpening extends Activity implements View.OnClickListener {
                             .commit();
                     Log.i("info","cb checked edilmis değil ( kaydedilmedi )");
                 }
+                babyControl();
             }
         }
         catch(Exception e)
@@ -198,7 +199,6 @@ public class ActivityOpening extends Activity implements View.OnClickListener {
             Log.e("LoginButtonFail 3", e.toString());
         }
         finally {
-            babyControl();
             Log.e("LoginButtonFinally", (String.valueOf(code)));
         }
     }

@@ -61,25 +61,25 @@ import org.json.JSONObject;
 /**
  * Created by aytunc on 16.2.2015.
  */
-public class ActivityEditBaby extends Activity implements OnClickListener{
+public class ActivityEditBaby extends Activity implements OnClickListener {
     ImageView imgSelectedPicture_BabyEdit;
     Button btnDatePicker_BabyEdit, btnTimePicker_BabyEdit, btnCancel_BabyEdit,
-            btnDelete_BabyEdit, btnOk_BabyEdit,btnTheme_BabyEdit;
+            btnDelete_BabyEdit, btnOk_BabyEdit, btnTheme_BabyEdit;
     EditText edtGetBabyName_BabyEdit;
     Calendar myCalendar = Calendar.getInstance();
     DatePickerDialog.OnDateSetListener dateForDB_BabyEdit;
     TimePickerDialog.OnTimeSetListener timeForDB_BabyEdit;
 
-    InputStream is=null;
-    String result=null;
-    String line=null;
+    InputStream is = null;
+    String result = null;
+    String line = null;
     int code;
 
     String getUserId_BabyEdit;
     String selectedDate_BabyEdit, selectedTime_BabyEdit, strTime_BabyEdit,
-            strDate_BabyEdit, selectedGendersForEditBaby,gettingImage;
+            strDate_BabyEdit, selectedGendersForEditBaby, gettingImage;
 
-    private String[] genders_EditBaby = { "MALE", "FEMALE" };
+    private String[] genders_EditBaby = {"MALE", "FEMALE"};
     private Spinner spinnerSelectGender_EditBaby;
     private ArrayAdapter<String> dataAdapterForGender_EditBaby;
 
@@ -112,7 +112,7 @@ public class ActivityEditBaby extends Activity implements OnClickListener{
         btnOk_BabyEdit = (Button) findViewById(R.id.btnOk_BabyEdit);
         edtGetBabyName_BabyEdit = (EditText) findViewById(R.id.edtBabyName_BabyEdit);
         spinnerSelectGender_EditBaby = (Spinner) findViewById(R.id.gender_spinner_EditBaby);
-        btnTheme_BabyEdit=(Button)findViewById(R.id.btnTheme_BabyEdit);
+        btnTheme_BabyEdit = (Button) findViewById(R.id.btnTheme_BabyEdit);
         /****************************
          * Set Click Listener to Buttons
          */
@@ -122,7 +122,7 @@ public class ActivityEditBaby extends Activity implements OnClickListener{
         btnDelete_BabyEdit.setOnClickListener((OnClickListener) this);
         btnOk_BabyEdit.setOnClickListener((OnClickListener) this);
         imgSelectedPicture_BabyEdit.setOnClickListener((OnClickListener) this);
-        btnTheme_BabyEdit.setOnClickListener((OnClickListener)this);
+        btnTheme_BabyEdit.setOnClickListener((OnClickListener) this);
 
         getValuesFromDatabases();
         /****************************
@@ -190,17 +190,18 @@ public class ActivityEditBaby extends Activity implements OnClickListener{
     private void getValuesFromDatabases() {
         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
-        nameValuePairs.add(new BasicNameValuePair("name", getBabyName));
+/*      nameValuePairs.add(new BasicNameValuePair("name", getBabyName));
         nameValuePairs.add(new BasicNameValuePair("date", selectedDate));
         nameValuePairs.add(new BasicNameValuePair("time", selectedTime));
         nameValuePairs.add(new BasicNameValuePair("image", selectedImageUri.toString()));
         nameValuePairs.add(new BasicNameValuePair("UID",getUserIDBabyCreate));
         nameValuePairs.add(new BasicNameValuePair("gender",selectedGendersForCreateBaby));;
-        nameValuePairs.add(new BasicNameValuePair("theme","Şimdilik Boş"));
+*/
+        nameValuePairs.add(new BasicNameValuePair("theme", "Şimdilik Boş"));
         try {
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost("http://176.58.88.85/~murat/insert_create_baby.php");
-            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs, "UTF-8"));
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();
             is = entity.getContent();
@@ -240,10 +241,9 @@ public class ActivityEditBaby extends Activity implements OnClickListener{
              *  Chech userName is exist or not
              */
             else if (code == 2) {
-                Toast.makeText(getBaseContext(), "Bu kullanıcıya ait" + getBabyName + "     isimli bir kayıt mevcut!!!",
+                Toast.makeText(getBaseContext(), "Bu kullanıcıya ait" + /*getBabyName*/"" + "     isimli bir kayıt mevcut!!!",
                         Toast.LENGTH_SHORT).show();
-            }
-            else {
+            } else {
                 Toast.makeText(getBaseContext(), "Sorry, Try Again",
                         Toast.LENGTH_LONG).show();
             }
@@ -362,7 +362,7 @@ public class ActivityEditBaby extends Activity implements OnClickListener{
         }
         // try to retrieve the image from the media store first
         // this will only work for images selected from gallery
-        String[] projection = { MediaStore.Images.Media.DATA };
+        String[] projection = {MediaStore.Images.Media.DATA};
         Cursor cursor = managedQuery(uri, projection, null, null, null);
         if (cursor != null) {
             int column_index = cursor
