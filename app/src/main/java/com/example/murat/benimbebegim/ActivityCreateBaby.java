@@ -10,12 +10,18 @@ package com.example.murat.benimbebegim;
         import java.util.TimeZone;
 
         import android.app.Activity;
+        import android.app.AlertDialog;
         import android.app.DatePickerDialog;
+        import android.app.Dialog;
         import android.app.TimePickerDialog;
+        import android.content.Context;
+        import android.content.DialogInterface;
         import android.content.Intent;
         import android.database.Cursor;
         import android.graphics.Bitmap;
         import android.graphics.Color;
+        import android.graphics.drawable.Drawable;
+        import android.graphics.drawable.GradientDrawable;
         import android.net.Uri;
         import android.os.Bundle;
         import android.provider.MediaStore;
@@ -63,6 +69,8 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
     DatePickerDialog.OnDateSetListener dateForDB;
     TimePickerDialog.OnTimeSetListener timeForDB;
     private static final int DEMO_DIALOG = 1;
+    final Context context = this;
+    String[] color_list = { "Red", "Green", "Blue"};
 
     LinearLayout colorlayout;
     String selectedDate, selectedTime, strTime, strDate, getBabyName,
@@ -283,8 +291,38 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
                 break;
 
             case R.id.btnTheme_createBaby:
-                showColorPickerDialogDemo();
-                break;
+                final Dialog dialog = new Dialog(context);
+                dialog.setContentView(R.layout.select_theme);
+                dialog.setTitle("Select Theme");
+
+                // set the custom dialog components - text, image and button
+                Button blue = (Button) dialog.findViewById(R.id.blue);
+                Button green  = (Button) dialog.findViewById(R.id.green);
+                Button yellow  = (Button) dialog.findViewById(R.id.yellow);
+                Button black  = (Button) dialog.findViewById(R.id.black);
+                Button white  = (Button) dialog.findViewById(R.id.white);
+                Button gray  = (Button) dialog.findViewById(R.id.gray);
+                Button orange  = (Button) dialog.findViewById(R.id.orange);
+                Button pink  = (Button) dialog.findViewById(R.id.pink);
+                Button purple  = (Button) dialog.findViewById(R.id.purple);
+                Button cancel  = (Button) dialog.findViewById(R.id.cancel);
+
+                blue.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Hepsini birden nasıl değiştiririz onu bul.
+                        LinearLayout createBaby=(LinearLayout)findViewById(R.id.layout_Create_Baby);
+                        Drawable drawable = getResources().getDrawable(R.drawable.bg_gradient_blue);
+                        Drawable reddrawable=getResources().getDrawable(R.drawable.bg_gradient);
+                        reddrawable=drawable;
+                        createBaby.setBackgroundDrawable(drawable);
+                        dialog.dismiss();
+
+                    }
+                });
+
+               dialog.show();
+
             default:
                 break;
         }

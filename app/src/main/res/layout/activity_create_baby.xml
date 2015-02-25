@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/bg_gradient"
-    android:padding="15dp">
+    android:padding="15dp"
+    android:id="@+id/layout_Create_Baby">
 
 
     <TextView
@@ -86,7 +87,7 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/bg_button_rounded"
         android:drawableLeft="@drawable/icon_time"
-        android:text="SELECT THEME"
+        android:text="@string/selecttheme"
         android:textColor="@color/white"/>
     <LinearLayout
         android:layout_width="match_parent"

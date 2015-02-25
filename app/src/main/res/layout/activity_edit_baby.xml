@@ -82,7 +82,7 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/bg_button_rounded"
         android:drawableLeft="@drawable/icon_time"
-        android:text="SELECT THEME"
+        android:text="@string/selecttheme"
         android:textColor="@color/white" />
 
     <LinearLayout
