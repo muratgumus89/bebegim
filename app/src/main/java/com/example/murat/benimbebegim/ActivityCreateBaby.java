@@ -1,6 +1,8 @@
 package com.example.murat.benimbebegim;
 
         import java.io.BufferedReader;
+        import java.io.File;
+        import java.io.FileNotFoundException;
         import java.io.InputStream;
         import java.io.InputStreamReader;
         import java.text.SimpleDateFormat;
@@ -9,6 +11,7 @@ package com.example.murat.benimbebegim;
         import java.util.Locale;
         import java.util.TimeZone;
 
+        import android.annotation.SuppressLint;
         import android.app.Activity;
         import android.app.AlertDialog;
         import android.app.DatePickerDialog;
@@ -20,11 +23,16 @@ package com.example.murat.benimbebegim;
         import android.content.SharedPreferences;
         import android.database.Cursor;
         import android.graphics.Bitmap;
+        import android.graphics.BitmapFactory;
         import android.graphics.Color;
         import android.graphics.drawable.Drawable;
         import android.graphics.drawable.GradientDrawable;
         import android.net.Uri;
+        import android.os.Build;
         import android.os.Bundle;
+        import android.os.StrictMode;
+        import android.preference.PreferenceManager;
+        import android.provider.DocumentsContract;
         import android.provider.MediaStore;
         import android.util.Log;
         import android.view.ContextMenu;
@@ -61,29 +69,37 @@ package com.example.murat.benimbebegim;
 
 
 public class ActivityCreateBaby extends Activity implements OnClickListener {
-
+    /*
+     Variables For Xml Components
+    */
     ImageView imgSelectBabyPicture;
     EditText edtNameCreateBaby, edtWeightCreateBaby, edtHeightCreateBaby;
-    Button btnDatePicker, btnTimePicker, btnCancelCreateBaby, btnOkCreateBaby,btnTheme;
-
-    Calendar myCalendar = Calendar.getInstance();
+    Button btnDatePicker, btnTimePicker, btnCancelCreateBaby, btnOkCreateBaby, btnTheme;
     DatePickerDialog.OnDateSetListener dateForDB;
     TimePickerDialog.OnTimeSetListener timeForDB;
+    LinearLayout colorlayout;
+    /*
+        Variables For Calendar
+    */
+    Calendar myCalendar = Calendar.getInstance();
+    /*
+        Variables For SelectTheme
+    */
     private static final int DEMO_DIALOG = 1;
     final Context context = this;
-    String[] color_list = { "Red", "Green", "Blue"};
-
-    LinearLayout colorlayout;
-    String selectedDate, selectedTime, strTime, strDate, getBabyName,
-            getBabyWeight, getBabyHeight, getUserId,
-            selectedGendersForCreateBaby;
+    String[] color_list = {"Red", "Green", "Blue"};
+    /*
+        Variables For GettingValues
+    */
+    String selectedDate, selectedTime, strTime, strDate, getBabyName,getUserId,
+            selectedGendersForCreateBaby, strSelectedImage = "null";
 
     /*
     Variables for Database
      */
-    InputStream is=null;
-    String result=null;
-    String line=null;
+    InputStream is = null;
+    String result = null;
+    String line = null;
     int code;
     /*
     Variables For SharedPreferences
@@ -95,19 +111,24 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
     private Spinner spinnerSelectGender;
     private ArrayAdapter<String> dataAdapterForGender;
 
-    // Baby Picture capture Variables
+    /*
+   Variables For BabyPicture Capture
+    */
     Intent i;
     final static int cameraData = 0;
     private static final int SELECT_PICTURE = 1;
     private String selectedImagePath;
-    public static Uri selectedImageUri;
+    public static Uri selectedImageUri = null;
     String getUserIDBabyCreate;
+    String realPath="null";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_baby);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         initUI();
     }
 
@@ -123,7 +144,7 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
         edtNameCreateBaby = (EditText) findViewById(R.id.etBabyName_createBaby);
         imgSelectBabyPicture = (ImageView) findViewById(R.id.ivBabyPicture_createBaby);
         spinnerSelectGender = (Spinner) findViewById(R.id.gender_spinner_createBaby);
-        btnTheme=(Button)findViewById(R.id.btnTheme_createBaby);
+        btnTheme = (Button) findViewById(R.id.btnTheme_createBaby);
 
         /****************************
          * Set Click Listener to Buttons
@@ -249,6 +270,7 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
                         Locale.getDefault());
                 strTime = time.format(c_time.getTime());
                 btnTimePicker.setText(strTime);
+                imgSelectBabyPicture.setImageResource(R.drawable.select_picture_icon_128);
                 break;
 
             case R.id.btnOk_createBaby:
@@ -273,17 +295,16 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
                  */
                 if (getBabyName.equals("")) {
                     Toast.makeText(getApplicationContext(),
-                            "Bebek İsmi Boş Bırakılamaz!!!", Toast.LENGTH_LONG)
+                            R.string.valid_Name, Toast.LENGTH_LONG)
                             .show();
                     return;
                 }
                 if (selectedGendersForCreateBaby.equals("")) {
                     Toast.makeText(getApplicationContext(),
-                            "Cinsiyet Bilgisini Seçiniz!!!", Toast.LENGTH_LONG)
+                            R.string.valid_Gender, Toast.LENGTH_LONG)
                             .show();
                     return;
-                }
-                else {
+                } else {
                     /******************
                      * Save the datas to Database
                      */
@@ -307,31 +328,31 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
 
                 // set the custom dialog components - text, image and button
                 Button blue = (Button) dialog.findViewById(R.id.blue);
-                Button green  = (Button) dialog.findViewById(R.id.green);
-                Button yellow  = (Button) dialog.findViewById(R.id.yellow);
-                Button black  = (Button) dialog.findViewById(R.id.black);
-                Button white  = (Button) dialog.findViewById(R.id.white);
-                Button gray  = (Button) dialog.findViewById(R.id.gray);
-                Button orange  = (Button) dialog.findViewById(R.id.orange);
-                Button pink  = (Button) dialog.findViewById(R.id.pink);
-                Button purple  = (Button) dialog.findViewById(R.id.purple);
-                Button cancel  = (Button) dialog.findViewById(R.id.cancel);
+                Button green = (Button) dialog.findViewById(R.id.green);
+                Button yellow = (Button) dialog.findViewById(R.id.yellow);
+                Button black = (Button) dialog.findViewById(R.id.black);
+                Button white = (Button) dialog.findViewById(R.id.white);
+                Button gray = (Button) dialog.findViewById(R.id.gray);
+                Button orange = (Button) dialog.findViewById(R.id.orange);
+                Button pink = (Button) dialog.findViewById(R.id.pink);
+                Button purple = (Button) dialog.findViewById(R.id.purple);
+                Button cancel = (Button) dialog.findViewById(R.id.cancel);
 
                 blue.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         //Hepsini birden nasıl değiştiririz onu bul.
-                        LinearLayout createBaby=(LinearLayout)findViewById(R.id.layout_Create_Baby);
+                        LinearLayout createBaby = (LinearLayout) findViewById(R.id.layout_Create_Baby);
                         Drawable drawable = getResources().getDrawable(R.drawable.bg_gradient_blue);
-                        Drawable reddrawable=getResources().getDrawable(R.drawable.bg_gradient);
-                        reddrawable=drawable;
+                        //Drawable reddrawable=getResources().getDrawable(R.drawable.bg_gradient);
+                        //reddrawable=drawable;
                         createBaby.setBackgroundDrawable(drawable);
                         dialog.dismiss();
 
                     }
                 });
 
-               dialog.show();
+                dialog.show();
 
             default:
                 break;
@@ -347,17 +368,17 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
         Log.e("date", selectedDate);
         nameValuePairs.add(new BasicNameValuePair("time", selectedTime));
         Log.e("time", selectedTime);
-        nameValuePairs.add(new BasicNameValuePair("image", selectedImageUri.toString()));
-        Log.e("image", selectedImageUri.toString());
-        nameValuePairs.add(new BasicNameValuePair("UID",getUserIDBabyCreate));
+        nameValuePairs.add(new BasicNameValuePair("image", realPath));
+        Log.e("image", realPath);
+        nameValuePairs.add(new BasicNameValuePair("UID", getUserIDBabyCreate));
         Log.e("uid", getUserIDBabyCreate);
-        nameValuePairs.add(new BasicNameValuePair("gender",selectedGendersForCreateBaby));
-        Log.e("gender",selectedGendersForCreateBaby);
-        nameValuePairs.add(new BasicNameValuePair("theme","Şimdilik Boş"));
+        nameValuePairs.add(new BasicNameValuePair("gender", selectedGendersForCreateBaby));
+        Log.e("gender", selectedGendersForCreateBaby);
+        nameValuePairs.add(new BasicNameValuePair("theme", "Şimdilik Boş"));
         try {
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost("http://176.58.88.85/~murat/insert_create_baby.php");
-            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs, "UTF-8"));
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();
             is = entity.getContent();
@@ -390,18 +411,34 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
              *  Checked record is inserted or not
              */
             if (code == 1) {
-                Toast.makeText(getBaseContext(), "kayıt başarıyla eklendi.",
+                preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());//preferences nesnesi oluşturuluyor ve prefernces referansına bağlanıyor
+                editor = preferences.edit(); //aynı şekil editor nesnesi oluşturuluyor
+
+                // Buraya bak murat
+                editor.putString("baby_name", getBabyName); //isim değeri
+                Log.d("EditörBabyName", preferences.getString("baby_name", ""));
+                editor.putString("user_id", getUserIDBabyCreate);//email değeri
+                Log.d("EditörUserId", preferences.getString("user_id", ""));
+                //editor.putString("sifre", sifre_string);//şifre değeri
+                //editor.putBoolean("login", true);//uygulamaya tekrar girdiğinde kontrol için kullanılcak
+                //editor.putInt("sayısalDeger", 1000);// uygulamamızda kullanılmıyor ama göstermek amacıyla
+
+                editor.commit();//yapılan değişiklikler kaydedilmesi için editor nesnesinin commit() metodu çağırılır.
+                //Değerlerimizi sharedPreferences a kaydettik.Artık bu bilgiler ile giriş yapabiliriz.
+                Toast.makeText(getBaseContext(), R.string.create_succesfully,
                         Toast.LENGTH_SHORT).show();
+                Intent intentHomeScreen = new Intent(getApplicationContext(),
+                        ActivityFeatures.class);
+                startActivity(intentHomeScreen);
             }
             /******************"
              *  Chech userName is exist or not
              */
             else if (code == 2) {
-                Toast.makeText(getBaseContext(), "Bu kullanıcıya ait" + getBabyName + "     isimli bir kayıt mevcut!!!",
+                Toast.makeText(getBaseContext(), getBabyName + R.string.have_A_Baby,
                         Toast.LENGTH_SHORT).show();
-            }
-             else {
-                Toast.makeText(getBaseContext(), "Sorry, Try Again",
+            } else {
+                Toast.makeText(getBaseContext(), R.string.sorry,
                         Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
@@ -412,6 +449,7 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
     }
 
     public Uri getSelectedImageUri() {
+
         return selectedImageUri;
     }
 
@@ -435,7 +473,7 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
         switch (item.getItemId()) {
             case R.id.itemTakePicture:
                 i = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(i, cameraData);
+                startActivityForResult(i, 0);
                 break;
 
             case R.id.itemChooseFromGallery:
@@ -443,8 +481,8 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
                 // En son açılan resimler seçilemiyor !!!!!!.....
                 Log.i("burdayim", "buragya gelebiliyorum");
                 Intent intent = new Intent();
-                intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
                 startActivityForResult(
                         Intent.createChooser(intent, "Select Picture"),
                         SELECT_PICTURE);
@@ -460,45 +498,71 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // TODO Auto-generated method stub
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            if (requestCode == SELECT_PICTURE) {
-                if (data.getData() != null) {
-                    selectedImageUri = data.getData();
-                    imgSelectBabyPicture.setImageURI(selectedImageUri);
-                    selectedImagePath = getPath(selectedImageUri);
-                }else if( data.getData() == null) {
-                    Log.i("data.getData()","abi burası null dönüyor");
-                }
-            } else {
-                Bundle extras = data.getExtras();
-                Bitmap bmp = (Bitmap) extras.get("data");
-                imgSelectBabyPicture.setImageBitmap(bmp);
-            }
+    protected void onActivityResult(int reqCode, int resCode, Intent data) {
+        if (resCode == Activity.RESULT_OK && data != null) {
+            // SDK < API11
+            if (Build.VERSION.SDK_INT < 11)
+                realPath = RealPathUtil.getRealPathFromURI_BelowAPI11(this, data.getData());
+
+                // SDK >= 11 && SDK < 19
+            else if (Build.VERSION.SDK_INT < 19)
+                realPath = RealPathUtil.getRealPathFromURI_API11to18(this, data.getData());
+
+                // SDK > 19 (Android 4.4)
+            else
+                realPath = RealPathUtil.getRealPathFromURI_API19(this, data.getData());
         }
+        setPath(Build.VERSION.SDK_INT, data.getData().getPath(),realPath);
     }
 
-    public String getPath(Uri uri) {
-        // just some safety built in
-        if (uri == null) {
-            // TODO perform some logging or show user feedback
-            return null;
-        }
-        // try to retrieve the image from the media store first
-        // this will only work for images selected from gallery
-        String[] projection = {MediaStore.Images.Media.DATA};
-        Cursor cursor = managedQuery(uri, projection, null, null, null);
-        if (cursor != null) {
-            int column_index = cursor
-                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            cursor.moveToFirst();
-            return cursor.getString(column_index);
-        }
-        // this is our fallback here
-        return uri.getPath();
-    }
+   private void setPath(int sdk, String uriPath,String realPath){
+
+       Uri uriFromPath = Uri.fromFile(new File(realPath));
+
+       // you have two ways to display selected image
+
+       // ( 1 ) imageView.setImageURI(uriFromPath);
+
+       // ( 2 ) imageView.setImageBitmap(bitmap);
+       Bitmap bitmap = null;
+       try {
+           bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uriFromPath));
+       } catch (FileNotFoundException e) {
+           e.printStackTrace();
+       }
+       imgSelectBabyPicture.setImageBitmap(bitmap);
+       Log.d("Bitmap",bitmap.toString());
+       Log.d("HMKCODE", "Build.VERSION.SDK_INT:"+sdk);
+       Log.d("HMKCODE", "URI Path:"+uriPath);
+       Log.d("HMKCODE", "Real Path: "+realPath);
+   }
+   @SuppressLint("NewApi")
+   public static String getRealPathFromURI_API19(Context context, Uri uri){
+       Log.d("FilePath:","PATH içinceyim");
+       String filePath = "";
+       String wholeID = DocumentsContract.getDocumentId(uri);
+
+       // Split at colon, use second item in the array
+       String id = wholeID.split(":")[1];
+
+       String[] column = { MediaStore.Images.Media.DATA };
+
+       // where id is equal to
+       String sel = MediaStore.Images.Media._ID + "=?";
+
+       Cursor cursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+               column, sel, new String[]{ id }, null);
+
+       int columnIndex = cursor.getColumnIndex(column[0]);
+
+       if (cursor.moveToFirst()) {
+           filePath = cursor.getString(columnIndex);
+       }
+
+       cursor.close();
+       Log.d("FilePath:",filePath);
+       return filePath;
+   }
 
     /**
      * Example of using Color Picker in Alert Dialog.

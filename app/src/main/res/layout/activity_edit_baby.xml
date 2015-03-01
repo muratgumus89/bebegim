@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient"
     android:orientation="vertical"
-    android:padding="15dp" >
+    android:padding="15dp"
+    android:id="@+id/layout_Edit_Baby">
 
     <TextView
         android:id="@+id/txtTitleBabyEdit"
@@ -28,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_form_rounded"
-        android:hint="Name" >
+        android:hint="@string/hint_name" >
     </EditText>
 
 
@@ -62,7 +63,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/bg_button_rounded"
         android:drawableLeft="@drawable/icon_date"
-        android:text="Button Date"
+        android:text="@string/Button_Date"
         android:textColor="@color/white" />
 
     <Button
@@ -73,7 +74,7 @@
         android:layout_marginTop="5dp"
         android:background="@drawable/bg_button_rounded"
         android:drawableLeft="@drawable/icon_time"
-        android:text="Button Time"
+        android:text="@string/Button_Time"
         android:textColor="@color/white" />
     <Button
         android:id="@+id/btnTheme_BabyEdit"

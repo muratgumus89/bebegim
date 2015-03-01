@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:id="@+id/layout_Sign_Up">
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -30,7 +31,7 @@
             android:weightSum="3"></LinearLayout>
 
         <TextView
-            android:id="@+id/welcome"
+            android:id="@+id/create_Account_Sign_Up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -49,43 +50,43 @@
             android:weightSum="3">
 
             <EditText
-                android:id="@+id/username"
+                android:id="@+id/username_Sign_Up"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/user"
-                android:hint="User Name"
+                android:hint="@string/hint_user_name"
                 android:padding="5dp"
                 android:textColorHint="#bbbbbb"
                 />
 
             <EditText
-                android:id="@+id/name"
+                android:id="@+id/name_Sign_Up"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/user"
-                android:hint="Name"
+                android:hint="@string/name"
                 android:padding="5dp"
                 android:textColorHint="#bbbbbb"
                 />
 
             <EditText
-                android:id="@+id/surname"
+                android:id="@+id/surname_Sign_Up"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:drawableLeft="@drawable/user"
-                android:hint="Surname"
+                android:hint="@string/hint_surname"
                 android:padding="5dp"
                 android:textColorHint="#bbbbbb"
                 />
 
             <EditText
-                android:id="@+id/email"
+                android:id="@+id/email_Sign_Up"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext_top_bg"
                 android:drawableLeft="@drawable/email"
-                android:hint="Email"
+                android:hint="@string/hint_email"
                 android:padding="5dp"
                 android:singleLine="true"
                 android:textColorHint="#bbbbbb"
@@ -94,24 +95,24 @@
                 </EditText>
 
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/password_Sign_Up"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:drawableLeft="@drawable/password"
-                android:hint="Password"
+                android:hint="@string/hint_password"
                 android:padding="5dp"
                 android:password="true"
                 android:textColorHint="#bbbbbb"
                 />
 
             <EditText
-                android:id="@+id/password_conf"
+                android:id="@+id/password_conf_Sign_Up"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:drawableLeft="@drawable/password"
-                android:hint="Confirm Password"
+                android:hint="@string/hint_confirm_password"
                 android:padding="5dp"
                 android:password="true"
                 android:textColorHint="#bbbbbb"
@@ -119,7 +120,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/register"
+            android:id="@+id/register_Sign_Up"
             style="@style/DefaultButtonText"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

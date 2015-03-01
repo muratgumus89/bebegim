@@ -5,7 +5,8 @@
     android:background="@drawable/bg_gradient"
     android:orientation="vertical"
     android:padding="15dp"
-    android:weightSum="90" >
+    android:weightSum="90"
+    android:id="@+id/layout_Home_Screen">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +15,7 @@
         android:weightSum="20" >
 
         <TextView
-            android:id="@+id/txtTheme"
+            android:id="@+id/txtTheme_Home_Screen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/theme"
@@ -28,7 +29,7 @@
             />
 
         <TextView
-            android:id="@+id/txtSettings"
+            android:id="@+id/txtSettings_Home_Screen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/settings"
@@ -48,7 +49,7 @@
         android:weightSum="20" >
 
         <TextView
-            android:id="@+id/txtCalendar"
+            android:id="@+id/txtCalendar_Home_Screen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/calendar"
@@ -61,7 +62,7 @@
             android:drawableTop="@drawable/icon_calendar_128" />
 
         <TextView
-            android:id="@+id/txtPhotos"
+            android:id="@+id/txtPhotos_Home_Screen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/photos"
@@ -81,7 +82,7 @@
         android:weightSum="20" >
 
         <TextView
-            android:id="@+id/txtReminder"
+            android:id="@+id/txtReminder_Home_Screen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/reminder"
@@ -95,7 +96,7 @@
             />
 
         <TextView
-            android:id="@+id/txtHelp"
+            android:id="@+id/txtHelp_Home_Screen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/help"

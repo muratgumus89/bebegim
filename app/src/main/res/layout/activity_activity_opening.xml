@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity"
+    android:id="@+id/layout_Opening">
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -31,7 +32,7 @@
             android:weightSum="3">
 
             <ImageButton
-                android:id="@+id/turkish"
+                android:id="@+id/turkish_lang_Opening"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.59"
@@ -39,7 +40,7 @@
                 android:src="@drawable/turk" />
 
             <ImageButton
-                android:id="@+id/english"
+                android:id="@+id/english_lang_Opening"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.48"
@@ -48,7 +49,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/welcome"
+            android:id="@+id/welcome_Opening"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/welcome"
@@ -66,7 +67,7 @@
             android:weightSum="3">
 
             <EditText
-                android:id="@+id/edtEmail"
+                android:id="@+id/edtEmail_Opening"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -79,7 +80,7 @@
             </EditText>
 
             <EditText
-                android:id="@+id/edtPassword"
+                android:id="@+id/edtPassword_Opening"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
@@ -89,17 +90,17 @@
         </LinearLayout>
 
         <CheckBox
-            android:id="@+id/remember"
+            android:id="@+id/check_Remember_Me_Opening"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1.40"
-            android:text="Remember Me"
+            android:text="@string/Remember_Me"
             android:layout_gravity="left"
             android:textSize="20sp"
             android:textColor="@color/white"            />
 
         <Button
-            android:id="@+id/btnLogin"
+            android:id="@+id/btnLogin_Opening"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_button_rounded"
@@ -108,7 +109,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/txtSign"
+        android:id="@+id/txtSign_Opening"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout1"
@@ -119,7 +120,7 @@
         android:textColor="@color/white"/>
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/txt_Select_Language"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"

@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_form_rounded"
-        android:hint="Name" >
+        android:hint="@string/hint_name" >
     </EditText>
 
     <LinearLayout
@@ -42,7 +42,7 @@
         android:layout_marginTop="10dp">
 
         <TextView
-            android:id="@+id/gender_text"
+            android:id="@+id/txt_Gender_Create_Baby"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
@@ -62,7 +62,7 @@
         android:id="@+id/btnDate_createBaby"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button Date"
+        android:text="@string/Button_Date"
         android:textColor="@color/white"
         android:layout_marginTop="10dp"
         android:background="@drawable/bg_button_rounded"
@@ -73,7 +73,7 @@
         android:id="@+id/btnTime_createBaby"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button Time"
+        android:text="@string/Button_Time"
         android:layout_marginTop="5dp"
         android:background="@drawable/bg_button_rounded"
         android:layout_marginBottom="5dp"

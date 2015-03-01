@@ -31,15 +31,18 @@ import java.util.regex.Pattern;
  * Created by aytunc on 16.2.2015.
  */
 public class ActivitySignUp extends Activity implements View.OnClickListener {
-    /******************
-     *  Define the Variables
-     */
+    /*
+    Variables For Xml Components
+    */
     String user_name,name,surname,email,password,getConfPassword;
+    EditText  edtUserName_Kayit,edtEmail_Kayit,edtPassword_Kayit,
+            edtCon_password_Kayit,edtName_Kayit,edtSurname_Kayit;
+    /*
+     Variables For MySql Connections
+    */
     InputStream is=null;
     String result=null;
     String line=null;
-    EditText  edtUserName_Kayit,edtEmail_Kayit,edtPassword_Kayit,
-            edtCon_password_Kayit,edtName_Kayit,edtSurname_Kayit;
     int code;
     boolean isValidEmail;
 
@@ -58,20 +61,23 @@ public class ActivitySignUp extends Activity implements View.OnClickListener {
      *  Define Components
      */
     private void InitUI() {
-        edtUserName_Kayit = (EditText) findViewById(R.id.username);
-        edtEmail_Kayit = (EditText) findViewById(R.id.email);
-        edtPassword_Kayit = (EditText) findViewById(R.id.password);
-        edtName_Kayit = (EditText) findViewById(R.id.name);
-        edtSurname_Kayit = (EditText) findViewById(R.id.surname);
-        edtCon_password_Kayit = (EditText) findViewById(R.id.password_conf);
-        Button btnRegister_Kayit = (Button) findViewById(R.id.register);
+         /*
+         Initialize Xml Components
+         */
+        edtUserName_Kayit = (EditText) findViewById(R.id.username_Sign_Up);
+        edtEmail_Kayit = (EditText) findViewById(R.id.email_Sign_Up);
+        edtPassword_Kayit = (EditText) findViewById(R.id.password_Sign_Up);
+        edtName_Kayit = (EditText) findViewById(R.id.name_Sign_Up);
+        edtSurname_Kayit = (EditText) findViewById(R.id.surname_Sign_Up);
+        edtCon_password_Kayit = (EditText) findViewById(R.id.password_conf_Sign_Up);
+        Button btnRegister_Kayit = (Button) findViewById(R.id.register_Sign_Up);
         btnRegister_Kayit.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.register:
+            case R.id.register_Sign_Up:
                 /******************
                  *  Get the values on the screen
                  */
@@ -91,10 +97,23 @@ public class ActivitySignUp extends Activity implements View.OnClickListener {
                 /******************
                  *  check if null area or not
                  */
-
-                if (user_name.equals("") || name.equals("") || surname.equals("")
-                        || email.equals("") || password.equals("") || getConfPassword.equals("")) {
-                    Toast.makeText(getApplicationContext(), "Boş Alan Bırakmayınız!!!", Toast.LENGTH_LONG).show();
+                if(user_name.equals("")){
+                    Toast.makeText(getApplicationContext(), R.string.valid_User_name, Toast.LENGTH_LONG).show();
+                    return;
+                }else if (name.equals("")){
+                    Toast.makeText(getApplicationContext(), R.string.valid_Name, Toast.LENGTH_LONG).show();
+                    return;
+                }else if(surname.equals("")){
+                    Toast.makeText(getApplicationContext(), R.string.valid_Surname, Toast.LENGTH_LONG).show();
+                    return;
+                }else if(email.equals("")){
+                    Toast.makeText(getApplicationContext(), R.string.valid_Email, Toast.LENGTH_LONG).show();
+                    return;
+                }else if(password.equals("")){
+                    Toast.makeText(getApplicationContext(), R.string.valid_Password, Toast.LENGTH_LONG).show();
+                    return;
+                }else if(getConfPassword.equals("")) {
+                    Toast.makeText(getApplicationContext(), R.string.valid_Confirm_Password, Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -103,14 +122,14 @@ public class ActivitySignUp extends Activity implements View.OnClickListener {
                  */
 
                 else if (!password.equals(getConfPassword)) {
-                    Toast.makeText(getApplicationContext(), "Şifreler Eşleşmiyor!!!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.not_Match_Password, Toast.LENGTH_LONG).show();
                     return;
                 }
                 /******************
                  *  Check email is valid or not
                  */
                 else if(!isValidEmail==true) {
-                    Toast.makeText(getApplicationContext(), "Yanlış Email Formatı!!!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.wrong_Email_Format, Toast.LENGTH_LONG).show();
                     return;
                 }
                 else
@@ -182,29 +201,29 @@ public class ActivitySignUp extends Activity implements View.OnClickListener {
              */
             if(code==1)
             {
-                Toast.makeText(getBaseContext(), "kayıt başarıyla eklendi.",
+                Toast.makeText(getBaseContext(), R.string.create_succesfully,
                         Toast.LENGTH_SHORT).show();
                 Intent intentOpening = new Intent(getApplicationContext(),
-                        ActivityCreateBaby.class);
+                        ActivityOpening.class);
                 startActivity(intentOpening);
             }
             /******************"
              *  Chech userName is exist or not
              */
             else if(code==2){
-                Toast.makeText(getBaseContext(), user_name+" isimli kullanıcı mevcut!!!",
+                Toast.makeText(getBaseContext(), user_name+R.string.exist_User_Name,
                         Toast.LENGTH_SHORT).show();
             }
             /******************
              *  Check emailAdress is exist or not
              */
             else if(code==3){
-                Toast.makeText(getBaseContext(), "Mevcut Email Adresi!!!",
+                Toast.makeText(getBaseContext(), R.string.exist_Email,
                         Toast.LENGTH_SHORT).show();
             }
             else
             {
-                Toast.makeText(getBaseContext(), "Sorry, Try Again",
+                Toast.makeText(getBaseContext(),R.string.sorry,
                         Toast.LENGTH_LONG).show();
             }
         }

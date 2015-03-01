@@ -40,8 +40,38 @@
     <string name="signup">Don\'t have account? Sign Up</string>
     <string name="button_label">OK</string>
     <string name="pref_name">Pick a color</string>
+    <string name="Remember_Me">Remember Me</string>
     <string name="pref_summary">DialogPreference with Color Picker.</string>
     <string name="selecttheme">SELECT THEME</string>
+    <string name="Button_Date">BUTTON DATE</string>
+    <string name="Button_Time">BUTTON TIME</string>
+    //For Hİnts
+    <string name="hint_user_name">User Name</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_surname">Surname</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    //For Toast Messages
+    <string name="valid_User_name">Valid UserName Required!!!</string>
+    <string name="valid_Name">Valid Name Required!!!</string>
+    <string name="valid_Surname">Valid Surname Required!!!</string>
+    <string name="valid_Email">Valid Email Required!!!</string>
+    <string name="valid_Password">Valid Password Required!!!</string>
+    <string name="valid_Confirm_Password">Valid Confirm Required!!!</string>
+    <string name="valid_Gender">Valid Gender Information Required!!!</string>
+    <string name="wrong_User_Name">Wrong UserName/Email Adress!!!</string>
+    <string name="wrong_Password">Wrong Password!!!</string>
+    <string name="wrong_Email_Format">Wrong Email Format!!!</string>
+    <string name="login_succesfully">Login Successfully</string>
+    <string name="create_succesfully">Account Created Successfully</string>
+    <string name="not_Match_Password">Password Doesnt Match!!!</string>
+    <string name="exist_User_Name">is Existed UserName!!!</string>
+    <string name="exist_Email">Existed Email Adress!!!</string>
+    <string name="sorry">Sorry, Try Again!!!</string>
+    <string name="have_A_Baby">is Already Belongs This User!!!</string>
+    <string name="update_account">Account Updated</string>
+    <string name="delete_account">Account Deleted</string>
 
     <style name="DefaultButtonText">
         <item name="android:layout_width">fill_parent</item>
