@@ -563,26 +563,6 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
        Log.d("FilePath:",filePath);
        return filePath;
    }
-
-    /**
-     * Example of using Color Picker in Alert Dialog.
-     */
-    private void showColorPickerDialogDemo() {
-
-        int initialColor = Color.WHITE;
-
-        ColorPickerDialog colorPickerDialog = new ColorPickerDialog(this, initialColor, new ColorPickerDialog.OnColorSelectedListener() {
-
-            @Override
-            public void onColorSelected(int color) {
-                showToast(color);
-            }
-
-        });
-        colorPickerDialog.show();
-
-    }
-
     /**
      * Displays Toast with RGB values of given color.
      *
