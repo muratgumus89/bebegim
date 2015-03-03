@@ -278,8 +278,8 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
                  * Get the values on the screen
                  */
                 getBabyName = edtNameCreateBaby.getText().toString();
-                Bundle basket = getIntent().getExtras();
-                getUserIDBabyCreate = basket.getString("userid");
+                //Bundle basket = getIntent().getExtras();//nereden gönderiliyor ? ACtivity opening.
+                //getUserIDBabyCreate = basket.getString("userid");
 
                 /******************
                  * Check Date and Time Picker Values null or not
@@ -360,6 +360,9 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
     }
 
     private void insert() {
+        preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());//preferences nesnesi oluşturuluyor ve prefernces referansına bağlanıyor
+        editor = preferences.edit(); //aynı şekil editor nesnesi oluşturuluyor
+        String strUser_id = preferences.getString("user_id", "");
         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
         nameValuePairs.add(new BasicNameValuePair("name", getBabyName));
@@ -370,8 +373,8 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
         Log.e("time", selectedTime);
         nameValuePairs.add(new BasicNameValuePair("image", realPath));
         Log.e("image", realPath);
-        nameValuePairs.add(new BasicNameValuePair("UID", getUserIDBabyCreate));
-        Log.e("uid", getUserIDBabyCreate);
+        nameValuePairs.add(new BasicNameValuePair("UID", strUser_id));
+        Log.e("uid", strUser_id);
         nameValuePairs.add(new BasicNameValuePair("gender", selectedGendersForCreateBaby));
         Log.e("gender", selectedGendersForCreateBaby);
         nameValuePairs.add(new BasicNameValuePair("theme", "Şimdilik Boş"));

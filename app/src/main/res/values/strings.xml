@@ -70,7 +70,7 @@
     <string name="exist_Email">Existed Email Adress!!!</string>
     <string name="sorry">Sorry, Try Again!!!</string>
     <string name="have_A_Baby">is Already Belongs This User!!!</string>
-    <string name="update_account">Account Updated</string>
+    <string name="update_account">Updated</string>
     <string name="delete_account">Account Deleted</string>
 
     <style name="DefaultButtonText">

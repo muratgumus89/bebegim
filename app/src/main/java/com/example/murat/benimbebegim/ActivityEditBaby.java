@@ -247,6 +247,7 @@ public class ActivityEditBaby extends Activity implements OnClickListener{
 
                 );
                 // json_data.getString("Image")
+                realPath=json_data.getString("Image");
                 if(!json_data.getString("Image").equals("null")) {
                     Drawable imgdrawable = Drawable.createFromPath(json_data.getString("Image"));
                     imgSelectedPicture_BabyEdit.setImageDrawable(imgdrawable);
@@ -505,7 +506,15 @@ public class ActivityEditBaby extends Activity implements OnClickListener{
          * Check Date and Time Picker Values null or not
          */
         nameValuePairs.add(new BasicNameValuePair("bid",strBaby_id));
-        nameValuePairs.add(new BasicNameValuePair("name",edtGetBabyName_BabyEdit.getText().toString()));
+        if(edtGetBabyName_BabyEdit.getText().toString().equals("")){
+            Toast.makeText(getApplicationContext(),
+                    R.string.valid_Name, Toast.LENGTH_LONG)
+                    .show();
+            return;
+        }
+        else {
+            nameValuePairs.add(new BasicNameValuePair("name", edtGetBabyName_BabyEdit.getText().toString()));
+        }
         nameValuePairs.add(new BasicNameValuePair("date",btnDatePicker_BabyEdit.getText().toString()));
         nameValuePairs.add(new BasicNameValuePair("time",btnTimePicker_BabyEdit.getText().toString()));
         nameValuePairs.add(new BasicNameValuePair("image",realPath));
