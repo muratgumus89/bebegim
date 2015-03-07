@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Benim Bebeğim</string>
+    <string name="action_settings">Settings</string>
+    <string name="select_lang">Please Select Language!</string>
+    <string name="welcome">Welcome!</string>
+    <string name="email">Email Address</string>
+    <string name="password">Password</string>
+    <string name="password_conf">Confirm Password</string>
+    <string name="user">User Name</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="login">Login</string>
+    <string name="save">Register</string>
+    <string name="turkish">Türkish</string>
+    <string name="english">English</string>
+    <string name="create">Create Account</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="gender">Gender : </string>
+    <string name="txtTitleBabyCreate">Create Baby Profile</string>
+    <string name="txtTitleBabyEdit">Edit Baby Profile</string>
+    <string name="ok">OK</string>
+    <string name="theme">Themes</string>
+    <string name="settings">Settings</string>
+    <string name="help">Help</string>
+    <string name="blue">Blue</string>
+    <string name="green">Green</string>
+    <string name="yellow">Yellow</string>
+    <string name="black">Black</string>
+    <string name="white">White</string>
+    <string name="gray">Gray</string>
+    <string name="orange">Orange</string>
+    <string name="pink">Pink</string>
+    <string name="purple">Purple</string>
+    <string name="reminder">Reminders</string>
+    <string name="photos">Photos</string>
+    <string name="calendar">Calendar</string>
+    <string name="signup">Don\'t have account? Sign Up</string>
+    <string name="button_label">OK</string>
+    <string name="pref_name">Pick a color</string>
+    <string name="Remember_Me">Remember Me</string>
+    <string name="pref_summary">DialogPreference with Color Picker.</string>
+    <string name="selecttheme">SELECT THEME</string>
+    <string name="Button_Date">BUTTON DATE</string>
+    <string name="Button_Time">BUTTON TIME</string>
+    //For Hİnts
+    <string name="hint_user_name">User Name</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_surname">Surname</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    //For Toast Messages
+    <string name="valid_User_name">Valid UserName Required!!!</string>
+    <string name="valid_Name">Valid Name Required!!!</string>
+    <string name="valid_Surname">Valid Surname Required!!!</string>
+    <string name="valid_Email">Valid Email Required!!!</string>
+    <string name="valid_Password">Valid Password Required!!!</string>
+    <string name="valid_Confirm_Password">Valid Confirm Required!!!</string>
+    <string name="valid_Gender">Valid Gender Information Required!!!</string>
+    <string name="wrong_User_Name">Wrong UserName/Email Adress!!!</string>
+    <string name="wrong_Password">Wrong Password!!!</string>
+    <string name="wrong_Email_Format">Wrong Email Format!!!</string>
+    <string name="login_succesfully">Login Successfully</string>
+    <string name="create_succesfully">Account Created Successfully</string>
+    <string name="not_Match_Password">Password Doesnt Match!!!</string>
+    <string name="exist_User_Name">is Existed UserName!!!</string>
+    <string name="exist_Email">Existed Email Adress!!!</string>
+    <string name="sorry">Sorry, Try Again!!!</string>
+    <string name="have_A_Baby">is Already Belongs This User!!!</string>
+    <string name="update_account">Updated</string>
+    <string name="delete_account">Account Deleted</string>
+
+    <style name="DefaultButtonText">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#979797</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:shadowColor">#f9f9f9</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">1</item>
+    </style>
+    <string name="ImageViewChoseFromGallery">Choose From Gallery</string>
+    <string name="ImageViewTakePicture">Take Picture</string>
+    <string name="ImageCancel">Cancel</string>
+
+</resources>

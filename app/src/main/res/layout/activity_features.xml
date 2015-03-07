@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:padding="15dp"
     android:weightSum="90"
-    android:id="@+id/layout_Home_Screen">
+    android:id="@+id/layout_features">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,10 +22,10 @@
             android:textColor="@color/white"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textSize="24dp"
+            android:textSize="20dp"
             android:layout_weight="10"
             android:textStyle="bold"
-            android:drawableTop="@drawable/icon_theme_128"
+            android:drawableTop="@drawable/icon_theme_72"
             />
 
         <TextView
@@ -36,10 +36,10 @@
             android:textColor="@color/white"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textSize="24dp"
+            android:textSize="20dp"
             android:layout_weight="10"
             android:textStyle="bold"
-            android:drawableTop="@drawable/icon_settings_128" />
+            android:drawableTop="@drawable/icon_settings_72" />
     </LinearLayout>
 
     <LinearLayout
@@ -54,12 +54,12 @@
             android:layout_height="wrap_content"
             android:text="@string/calendar"
             android:textColor="@color/white"
-            android:textSize="24dp"
+            android:textSize="20dp"
             android:layout_weight="10"
             android:layout_gravity="center"
             android:gravity="center"
             android:textStyle="bold"
-            android:drawableTop="@drawable/icon_calendar_128" />
+            android:drawableTop="@drawable/icon_calender_72" />
 
         <TextView
             android:id="@+id/txtPhotos_Home_Screen"
@@ -70,9 +70,9 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_weight="10"
-            android:textSize="24dp"
+            android:textSize="20dp"
             android:textStyle="bold"
-            android:drawableTop="@drawable/icon_photos_128"/>
+            android:drawableTop="@drawable/icon_photos_72"/>
     </LinearLayout>
 
     <LinearLayout
@@ -89,10 +89,10 @@
             android:textColor="@color/white"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textSize="24dp"
+            android:textSize="20dp"
             android:layout_weight="10"
             android:textStyle="bold"
-            android:drawableTop="@drawable/icon_reminder_128"
+            android:drawableTop="@drawable/icon_reminder_72"
             />
 
         <TextView
@@ -102,11 +102,11 @@
             android:text="@string/help"
             android:textColor="@color/white"
             android:layout_gravity="center"
-            android:textSize="24dp"
+            android:textSize="20dp"
             android:gravity="center"
             android:layout_weight="10"
             android:textStyle="bold"
-            android:drawableTop="@drawable/icon_help_128" />
+            android:drawableTop="@drawable/icon_help_72" />
     </LinearLayout>
 
 </LinearLayout>

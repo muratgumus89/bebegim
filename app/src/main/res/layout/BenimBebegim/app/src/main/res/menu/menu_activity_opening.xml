@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:context=".ActivityOpening">
+    <item
+        android:id="@+id/itemTakePicture"
+        android:orderInCategory="100"
+        android:title="@string/ImageViewTakePicture"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/itemChooseFromGallery"
+        android:orderInCategory="100"
+        android:title="@string/ImageViewChoseFromGallery"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/itemCancel"
+        android:orderInCategory="100"
+        android:title="@string/ImageCancel"
+        app:showAsAction="always" />
+</menu>

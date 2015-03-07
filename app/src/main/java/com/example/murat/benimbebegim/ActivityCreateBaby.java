@@ -1,7 +1,9 @@
 package com.example.murat.benimbebegim;
 
         import java.io.BufferedReader;
+        import java.io.ByteArrayOutputStream;
         import java.io.File;
+        import java.io.FileInputStream;
         import java.io.FileNotFoundException;
         import java.io.InputStream;
         import java.io.InputStreamReader;
@@ -85,9 +87,7 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
     /*
         Variables For SelectTheme
     */
-    private static final int DEMO_DIALOG = 1;
     final Context context = this;
-    String[] color_list = {"Red", "Green", "Blue"};
     /*
         Variables For GettingValues
     */
@@ -97,6 +97,7 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
     /*
     Variables for Database
      */
+    String image_str;
     InputStream is = null;
     String result = null;
     String line = null;
@@ -365,13 +366,23 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
         String strUser_id = preferences.getString("user_id", "");
         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
+        if(!realPath.equals("null")) {
+            Bitmap bitmap = BitmapFactory.decodeFile(realPath);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream); //compress to which format you want.
+            byte[] byte_arr = stream.toByteArray();
+            image_str = Base64.encodeBytes(byte_arr);
+        }else{
+            image_str = "null";
+        }
+
         nameValuePairs.add(new BasicNameValuePair("name", getBabyName));
         Log.e("name", getBabyName);
         nameValuePairs.add(new BasicNameValuePair("date", selectedDate));
         Log.e("date", selectedDate);
         nameValuePairs.add(new BasicNameValuePair("time", selectedTime));
         Log.e("time", selectedTime);
-        nameValuePairs.add(new BasicNameValuePair("image", realPath));
+        nameValuePairs.add(new BasicNameValuePair("image",image_str));
         Log.e("image", realPath);
         nameValuePairs.add(new BasicNameValuePair("UID", strUser_id));
         Log.e("uid", strUser_id);
@@ -431,7 +442,7 @@ public class ActivityCreateBaby extends Activity implements OnClickListener {
                 Toast.makeText(getBaseContext(), R.string.create_succesfully,
                         Toast.LENGTH_SHORT).show();
                 Intent intentHomeScreen = new Intent(getApplicationContext(),
-                        ActivityFeatures.class);
+                        ActivityHomeScreen.class);
                 startActivity(intentHomeScreen);
             }
             /******************"

@@ -89,5 +89,32 @@
     <string name="ImageViewChoseFromGallery">Choose From Gallery</string>
     <string name="ImageViewTakePicture">Take Picture</string>
     <string name="ImageCancel">Cancel</string>
+    <string name="click_add">Click to Add Event...</string>
+    //String Values For Favorites ListView
+    <string-array name="Favorites">
+    <item>Mood</item>
+    <item>Solid</item>
+    <item>Bottle</item>
+    <item>Breast</item>
+    <item>Sleep</item>
+    <item>Diaper</item>
+    <item>Pumping</item>
+</string-array>
+    //String Values For MoreEvents ListView
+    <string-array name="MoreEvents">
+        <item>Health</item>
+        <item>Medicine</item>
+        <item>Vaccination</item>
+        <item>Hygiene</item>
+        <item>Teeth</item>
+    </string-array>
+    <string-array name="menu">
+        <item >Başlangıç</item>
+        <item >Android</item>
+        <item >IOS</item>
+        <item >Windows Phone</item>
+    </string-array>
 
+    <string name="drawer_open">Drawer Açıldı</string>
+    <string name="drawer_close">Drawer Kapandı</string>
 </resources>

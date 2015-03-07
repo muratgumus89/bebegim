@@ -2,6 +2,7 @@
 package com.example.murat.benimbebegim;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -85,6 +86,7 @@ public class ActivityEditBaby extends Activity implements OnClickListener{
     /*
      Variables For MySql Connections
     */
+    String image_str;
     InputStream is=null;
     String result=null;
     String line=null;
@@ -248,9 +250,10 @@ public class ActivityEditBaby extends Activity implements OnClickListener{
                 );
                 // json_data.getString("Image")
                 realPath=json_data.getString("Image");
+                Bitmap image=StringToBitMap(realPath);
+
                 if(!json_data.getString("Image").equals("null")) {
-                    Drawable imgdrawable = Drawable.createFromPath(json_data.getString("Image"));
-                    imgSelectedPicture_BabyEdit.setImageDrawable(imgdrawable);
+                    imgSelectedPicture_BabyEdit.setImageBitmap(image);
                 }
                 else{
                     imgSelectedPicture_BabyEdit.setImageResource(R.drawable.select_picture_icon_128);
@@ -515,9 +518,18 @@ public class ActivityEditBaby extends Activity implements OnClickListener{
         else {
             nameValuePairs.add(new BasicNameValuePair("name", edtGetBabyName_BabyEdit.getText().toString()));
         }
+        if(!realPath.equals("null")) {
+            Bitmap bitmap = BitmapFactory.decodeFile(realPath);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream); //compress to which format you want.
+            byte[] byte_arr = stream.toByteArray();
+            image_str = Base64.encodeBytes(byte_arr);
+        }else{
+            image_str = "null";
+        }
         nameValuePairs.add(new BasicNameValuePair("date",btnDatePicker_BabyEdit.getText().toString()));
         nameValuePairs.add(new BasicNameValuePair("time",btnTimePicker_BabyEdit.getText().toString()));
-        nameValuePairs.add(new BasicNameValuePair("image",realPath));
+        nameValuePairs.add(new BasicNameValuePair("image",image_str));
         nameValuePairs.add(new BasicNameValuePair("uid",strUser_id ));
         nameValuePairs.add(new BasicNameValuePair("gender",selectedGendersForEditBaby));
         nameValuePairs.add(new BasicNameValuePair("theme","Theme"));
@@ -653,5 +665,16 @@ public class ActivityEditBaby extends Activity implements OnClickListener{
         Log.d("HMKCODE", "Build.VERSION.SDK_INT:"+sdk);
         Log.d("HMKCODE", "URI Path:"+uriPath);
         Log.d("HMKCODE", "Real Path: "+realPath);
+    }
+    public Bitmap StringToBitMap(String encodedString) {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DECODE);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0,
+                    encodeByte.length);
+            return bitmap;
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
     }
 }

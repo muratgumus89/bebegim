@@ -269,7 +269,7 @@ public class ActivityOpening extends Activity implements View.OnClickListener {
             } else {
 
                 Intent intentHomeScreen = new Intent(getApplicationContext(),
-                        ActivityFeatures.class);
+                        ActivityHomeScreen.class);
                 startActivity(intentHomeScreen);
             }
         } catch (Exception e) {

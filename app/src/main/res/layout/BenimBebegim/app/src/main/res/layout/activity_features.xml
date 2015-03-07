@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient"
+    android:orientation="vertical"
+    android:padding="15dp"
+    android:weightSum="90"
+    android:id="@+id/layout_Home_Screen">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="30"
+        android:weightSum="20" >
+
+        <TextView
+            android:id="@+id/txtTheme_Home_Screen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/theme"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="24dp"
+            android:layout_weight="10"
+            android:textStyle="bold"
+            android:drawableTop="@drawable/icon_theme_128"
+            />
+
+        <TextView
+            android:id="@+id/txtSettings_Home_Screen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/settings"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="24dp"
+            android:layout_weight="10"
+            android:textStyle="bold"
+            android:drawableTop="@drawable/icon_settings_128" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="30"
+        android:weightSum="20" >
+
+        <TextView
+            android:id="@+id/txtCalendar_Home_Screen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/calendar"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            android:layout_weight="10"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:drawableTop="@drawable/icon_calendar_128" />
+
+        <TextView
+            android:id="@+id/txtPhotos_Home_Screen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/photos"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="10"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:drawableTop="@drawable/icon_photos_128"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="30"
+        android:weightSum="20" >
+
+        <TextView
+            android:id="@+id/txtReminder_Home_Screen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reminder"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="24dp"
+            android:layout_weight="10"
+            android:textStyle="bold"
+            android:drawableTop="@drawable/icon_reminder_128"
+            />
+
+        <TextView
+            android:id="@+id/txtHelp_Home_Screen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/help"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:textSize="24dp"
+            android:gravity="center"
+            android:layout_weight="10"
+            android:textStyle="bold"
+            android:drawableTop="@drawable/icon_help_128" />
+    </LinearLayout>
+
+</LinearLayout>

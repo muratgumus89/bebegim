@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_gradient"
+    android:padding="15dp"
+    android:id="@+id/layout_Create_Baby">
+
+
+    <TextView
+        android:id="@+id/txtTitleBabyCreate"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/txtTitleBabyCreate"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/white"
+        android:textSize="32dp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/ivBabyPicture_createBaby"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="15dp"
+        android:src="@drawable/select_picture_icon_128"/>
+
+    <EditText
+        android:id="@+id/etBabyName_createBaby"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_form_rounded"
+        android:hint="@string/hint_name" >
+    </EditText>
+
+    <LinearLayout
+        android:id="@+id/gender_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="90"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/txt_Gender_Create_Baby"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:gravity="center"
+            android:text="@string/gender"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+
+        <Spinner
+            android:id="@+id/gender_spinner_createBaby"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnDate_createBaby"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Button_Date"
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_button_rounded"
+        android:drawableLeft="@drawable/icon_date"
+        />
+
+    <Button
+        android:id="@+id/btnTime_createBaby"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Button_Time"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bg_button_rounded"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/white"
+        android:drawableLeft="@drawable/icon_time"
+        />
+    <Button
+        android:id="@+id/btnTheme_createBaby"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/bg_button_rounded"
+        android:drawableLeft="@drawable/icon_time"
+        android:text="@string/selecttheme"
+        android:textColor="@color/white"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="90" >
+
+        <Button
+            android:id="@+id/btnCancel_createBaby"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_button_rounded"
+            android:text="@string/cancel"
+            android:layout_weight="35"
+            android:textColor="@color/white"
+            android:drawableLeft="@drawable/icon_cancel"
+            android:layout_marginRight="10dp" />
+
+        <Button
+            android:id="@+id/btnOk_createBaby"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_button_rounded"
+            android:text="@string/ok"
+            android:layout_weight="55"
+            android:textColor="@color/white"
+            android:drawableLeft="@drawable/icon_ok" />
+    </LinearLayout>
+
+</LinearLayout>
