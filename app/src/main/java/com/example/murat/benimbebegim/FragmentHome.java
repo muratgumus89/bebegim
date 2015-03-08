@@ -13,7 +13,7 @@ public class FragmentHome extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		View view = inflater.inflate(R.layout.layout_homefragment, container,false);
+		View view = inflater.inflate(R.layout.activity_features, container,false);
 		return view;
 	}
 }

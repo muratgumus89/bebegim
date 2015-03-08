@@ -109,10 +109,12 @@
         <item>Teeth</item>
     </string-array>
     <string-array name="menu">
-        <item >Başlangıç</item>
-        <item >Android</item>
-        <item >IOS</item>
-        <item >Windows Phone</item>
+        <item >Home</item>
+        <item >History</item>
+        <item >Stats</item>
+        <item >Diary</item>
+        <item >Features</item>
+        <item >Favorites</item>
     </string-array>
 
     <string name="drawer_open">Drawer Açıldı</string>
