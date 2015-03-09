@@ -4,13 +4,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.example.murat.benimbebegim.ActivityCategory;
+import com.example.murat.benimbebegim.ActivityEarlier;
 import com.example.murat.benimbebegim.ActivityFavorites;
 import com.example.murat.benimbebegim.ActivityFeatures;
 import com.example.murat.benimbebegim.ActivityMoreEvents;
+import com.example.murat.benimbebegim.ActivityToday;
 
-public class TabsFragmentPagerAdapter extends FragmentPagerAdapter {
- 
- public TabsFragmentPagerAdapter(FragmentManager fm) {
+public class TabsFragmentPagerAdapterForHistory extends FragmentPagerAdapter {
+
+ public TabsFragmentPagerAdapterForHistory(FragmentManager fm) {
  super(fm);
  // TODO Auto-generated constructorq stub
  }
@@ -19,18 +22,11 @@ public class TabsFragmentPagerAdapter extends FragmentPagerAdapter {
  public Fragment getItem(int index) {
  // TODO Auto-generated method stub
  if(index == 0)
- return new ActivityFeatures();
+ return new ActivityEarlier();
  if(index == 1)
- return new ActivityFavorites();
+ return new ActivityToday();
  if(index == 2)
- return new ActivityMoreEvents();
- if(index == 5)
- return new ActivityFeatures();
- if(index == 4)
- return new ActivityFavorites();
- if(index == 3)
- return new ActivityMoreEvents();
- 
+ return new ActivityCategory();
  
  return null;
  }

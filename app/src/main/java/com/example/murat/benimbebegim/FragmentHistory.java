@@ -12,10 +12,11 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.example.murat.benimbebegim.adapters.TabsFragmentPagerAdapter;
+import com.example.murat.benimbebegim.adapters.TabsFragmentPagerAdapterForHistory;
 
-public class FragmentHome extends Fragment implements ActionBar.TabListener {
+public class FragmentHistory extends Fragment implements ActionBar.TabListener {
 
-    public static final String TAG = FragmentHome.class.getSimpleName();
+    public static final String TAG = FragmentHistory.class.getSimpleName();
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -23,13 +24,13 @@ public class FragmentHome extends Fragment implements ActionBar.TabListener {
     Integer count;
     ViewPager mViewPager;
     private ActionBar actionBar;
-    private TabsFragmentPagerAdapter tabsAdapter;
-    private String[] days = new String[]{"Features", "Favorites", "More Events"};
+    private TabsFragmentPagerAdapterForHistory tabsAdapter;
+    private String[] days = new String[]{"Features", "Favorites", "More Events","Earlier", "Today", "Category"};
 
 
 
-    public static FragmentHome newInstance() {
-        return new FragmentHome();
+    public static FragmentHistory newInstance() {
+        return new FragmentHistory();
     }
 
     @Override
@@ -39,8 +40,8 @@ public class FragmentHome extends Fragment implements ActionBar.TabListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.layout_homefragment, container, false);
-        tabsAdapter = new TabsFragmentPagerAdapter(
+        View v = inflater.inflate(R.layout.layout_historyfragment, container, false);
+        tabsAdapter = new TabsFragmentPagerAdapterForHistory(
                 getChildFragmentManager());
 
         mViewPager = (ViewPager) v.findViewById(R.id.viewPager);
@@ -48,7 +49,7 @@ public class FragmentHome extends Fragment implements ActionBar.TabListener {
         actionBar = getActivity().getActionBar();
         actionBar.removeAllTabs();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        for (int i = 0; i < 3; i++) {
+        for (int i = 3; i < 6; i++) {
             actionBar.addTab(actionBar.newTab().setText(days[i])
                     .setTabListener(this));
         }

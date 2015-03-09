@@ -113,10 +113,24 @@
         <item >History</item>
         <item >Stats</item>
         <item >Diary</item>
-        <item >Features</item>
-        <item >Favorites</item>
+        <item >Growth</item>
     </string-array>
-
-    <string name="drawer_open">Drawer Açıldı</string>
-    <string name="drawer_close">Drawer Kapandı</string>
+    <string name="mood">Mood</string>
+    <string name="solid">Solid</string>
+    <string name="bottle">Bottle</string>
+    <string name="breast">Breast</string>
+    <string name="sleep">Sleep</string>
+    <string name="diaper">Diaper</string>
+    <string name="pumping">Pumping</string>
+    <string name="medicine">Medicine</string>
+    <string name="health">Health</string>
+    <string name="vaccination">Vaccination</string>
+    <string name="hygiene">Hygiene</string>
+    <string name="teeth">Teeth</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="title_activity_item_one">ItemOne</string>
+    <string name="title_section1">Features</string>
+    <string name="title_section2">Favorites</string>
+    <string name="title_section3">More Events</string>
 </resources>
