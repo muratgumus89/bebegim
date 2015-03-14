@@ -1,16 +1,18 @@
 package com.example.murat.benimbebegim;;
-        import android.os.Bundle;
-        import android.support.v4.app.ActionBarDrawerToggle;
-        import android.support.v4.app.FragmentActivity;
-        import android.support.v4.widget.DrawerLayout;
-        import android.util.Log;
-        import android.view.Menu;
-        import android.view.MenuItem;
-        import android.view.View;
-        import android.widget.AdapterView;
-        import android.widget.AdapterView.OnItemClickListener;
-        import android.widget.ArrayAdapter;
-        import android.widget.ListView;
+
+import android.content.res.Configuration;
+import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+
 
 public class ActivityHomeScreen extends FragmentActivity {
 
@@ -36,38 +38,11 @@ public class ActivityHomeScreen extends FragmentActivity {
 
         mTitle = "Benim Bebeğim";
         getActionBar().setTitle(mTitle);
-
-
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-
         mDrawerList = (ListView) findViewById(R.id.drawer_list);
 
-        // Navigationdaki Drawer için listview adapteri
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getBaseContext(),
-                R.layout.drawer_list_item, getResources().getStringArray(R.array.menu));
-
-        // adapteri listviewe set ediyoruz
-        mDrawerList.setAdapter(adapter);
-
-        // iconu ve açılıp kapandığında görünecek texti veriyoruz.
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-                R.drawable.ic_drawer, R.string.drawer_open,
-                R.string.drawer_close) {
-
-            // drawer kapatıldığında tetiklenen method
-            public void onDrawerClosed(View view) {
-                getActionBar().setTitle(mTitle);
-                invalidateOptionsMenu();
-
-            }
-
-            // drawer açıldığında tetiklenen method
-            public void onDrawerOpened(View drawerView) {
-                getActionBar().setTitle("Benim Bebeğim");
-                invalidateOptionsMenu();
-            }
-
-        };
+        addDrawerItems();
+        setupDrawer();
 
 
         // actionbar home butonunu aktif ediyoruz
@@ -82,17 +57,44 @@ public class ActivityHomeScreen extends FragmentActivity {
             navigateTo(0);
         }
 
-        // sol slider açıldığında gelen listviewin tıklama eventi
-        mDrawerList.setOnItemClickListener(new OnItemClickListener() {
+    }
 
+    private void setupDrawer() {
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
+
+
+            // drawer kapatıldığında tetiklenen method
+            public void onDrawerClosed(View view) {
+                getActionBar().setTitle(mTitle);
+                invalidateOptionsMenu();
+
+            }
+
+            // drawer açıldığında tetiklenen method
+            public void onDrawerOpened(View drawerView) {
+                getActionBar().setTitle("Benim Bebeğim");
+                invalidateOptionsMenu();
+            }
+        };
+
+        mDrawerToggle.setDrawerIndicatorEnabled(true);
+    }
+
+    private void addDrawerItems() {
+        // Navigationdaki Drawer için listview adapteri
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getBaseContext(),
+                R.layout.drawer_list_item, getResources().getStringArray(R.array.menu));
+
+        // adapteri listviewe set ediyoruz
+        mDrawerList.setAdapter(adapter);
+
+        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 navigateTo(position);
 
                 // draweri kapat
                 mDrawerLayout.closeDrawer(mDrawerList);
-
             }
         });
     }
@@ -102,13 +104,40 @@ public class ActivityHomeScreen extends FragmentActivity {
         super.onPostCreate(savedInstanceState);
         mDrawerToggle.syncState();
     }
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_activity_opening, menu);
+        return true;
+    }
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        //draweri sadece swipe ederek açma yerine sol tepedeki butona basarak açmak için
+        /*//draweri sadece swipe ederek açma yerine sol tepedeki butona basarak açmak için
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
+        return super.onOptionsItemSelected(item);*/
+
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        // Activate the navigation drawer toggle
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -120,11 +149,6 @@ public class ActivityHomeScreen extends FragmentActivity {
         return super.onPrepareOptionsMenu(menu);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_activity_opening, menu);
-        return true;
-    }
     private void navigateTo(int position) {
         Log.v(TAG, "List View Item: " + position);
 
